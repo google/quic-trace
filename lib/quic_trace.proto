@@ -135,7 +135,8 @@ enum EventType {
   APPLICATION_LIMITED = 4;
 
   // Record when an external information about expected network conditions
-  // (available bandwidth, RTT, congestion window, etc).
+  // (available bandwidth, RTT, congestion window, etc) is supplied to the
+  // sender.
   EXTERNAL_PARAMETERS = 5;
 };
 
