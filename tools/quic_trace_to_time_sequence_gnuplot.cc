@@ -26,8 +26,8 @@
 
 ABSL_FLAG(std::string,
           sequence,
-          "Which time sequence to plot: send, ack or loss.",
-          "");
+          "",
+          "Which time sequence to plot: send, ack or loss.");
 ABSL_FLAG(bool,
           filter_old_acks,
           true,
@@ -142,8 +142,8 @@ int main(int argc, char* argv[]) {
   if (absl::GetFlag(FLAGS_sequence) != "send" &&
       absl::GetFlag(FLAGS_sequence) != "ack" &&
       absl::GetFlag(FLAGS_sequence) != "loss") {
-    std::cerr << "The --type parameter has to be set to either 'send', 'ack' "
-                 "or 'loss'."
+    std::cerr << "The --sequence parameter has to be set to either 'send', "
+                 "'ack' or 'loss'."
               << std::endl;
     return 1;
   }
