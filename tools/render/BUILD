@@ -94,6 +94,7 @@ cc_binary(
     ],
     deps = [
         ":render_program",
+        "@com_google_absl//absl/flags:parse",
         "@com_google_glog//:glog",
     ],
 )
