@@ -22,7 +22,7 @@ cc_library(
     name = "numbering",
     hdrs = ["trace_numbering.h"],
     deps = [
-        "//lib:quic_trace_cc_proto",
+        "//quic_trace:quic_trace_cc_proto",
         "@com_google_absl//absl/container:flat_hash_map",
         "@com_google_glog//:glog",
     ],
