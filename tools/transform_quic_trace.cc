@@ -23,7 +23,7 @@
 #include "absl/flags/parse.h"
 #include "absl/strings/string_view.h"
 #include "google/protobuf/util/json_util.h"
-#include "lib/quic_trace.pb.h"
+#include "quic_trace/quic_trace.pb.h"
 
 ABSL_FLAG(bool, whitespace, true, "Add whitespace to the JSON output");
 ABSL_FLAG(std::string,

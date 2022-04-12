@@ -23,7 +23,7 @@
 #include <unordered_map>
 
 #include "absl/container/flat_hash_map.h"
-#include "lib/quic_trace.pb.h"
+#include "quic_trace/quic_trace.pb.h"
 
 namespace quic_trace {
 

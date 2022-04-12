@@ -76,8 +76,8 @@ cc_library(
     ],
     deps = [
         ":render_core",
-        "//lib:quic_trace_cc_proto",
-        "//lib/analysis:numbering",
+        "//quic_trace:quic_trace_cc_proto",
+        "//quic_trace/analysis:numbering",
         "@com_google_absl//absl/algorithm:container",
         "@com_google_absl//absl/container:flat_hash_map",
         "@com_google_absl//absl/container:flat_hash_set",
