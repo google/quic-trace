@@ -80,7 +80,7 @@ std::string GlShader::GetCompileInfoLog() {
   GLint actual_size = 0;
 
   glGetShaderiv(shader_, GL_INFO_LOG_LENGTH, &buffer_size);
-  auto buffer = absl::make_unique<char[]>(buffer_size);
+  auto buffer = std::make_unique<char[]>(buffer_size);
 
   glGetShaderInfoLog(shader_, buffer_size, &actual_size, buffer.get());
   return std::string(buffer.get(), actual_size);
