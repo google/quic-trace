@@ -58,7 +58,6 @@ OpenGlContext::OpenGlContext(SDL_Window* window) {
               LOG(INFO) << "[GL]: " << std::string(message, length);
               break;
             case GL_DEBUG_SEVERITY_NOTIFICATION:
-              VLOG(1) << "[GL]: " << std::string(message, length);
               break;
           }
         },
