@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
   google::InitGoogleLogging(argv[0]);
 
   CHECK_GE(argc, 2) << "Specify file path";
-  auto trace = absl::make_unique<quic_trace::Trace>();
+  auto trace = std::make_unique<quic_trace::Trace>();
   {
     std::string filename(argv[1]);
     std::ifstream f(filename);
