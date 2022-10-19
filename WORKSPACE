@@ -17,19 +17,9 @@ http_archive(
     urls = ["https://github.com/protocolbuffers/protobuf/archive/v3.14.0.tar.gz"],
 )
 
-http_archive(
-    name = "com_github_gflags_gflags",
-    sha256 = "6e16c8bc91b1310a44f3965e616383dbda48f83e8c1eaa2370a215057b00cabe",
-    strip_prefix = "gflags-77592648e3f3be87d6c7123eb81cbad75f9aef5a",
-    urls = [
-        "https://mirror.bazel.build/github.com/gflags/gflags/archive/77592648e3f3be87d6c7123eb81cbad75f9aef5a.tar.gz",
-        "https://github.com/gflags/gflags/archive/77592648e3f3be87d6c7123eb81cbad75f9aef5a.tar.gz",
-    ],
-)
-
 git_repository(
     name = "com_google_absl",
-    commit = "143a27800eb35f4568b9be51647726281916aac9",
+    commit = "ff100974413ccdd24b361ff9eb7cc78efb0cee78",
     remote = "https://github.com/abseil/abseil-cpp.git",
 )
 
@@ -47,12 +37,6 @@ http_archive(
     sha256 = "ad7a7d2562c19ad2b71fa4ab2e76f9f52b3ee98096c0a7d7efbafc2617073c27",
     strip_prefix = "SDL2_ttf-2.0.14",
     urls = ["https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.14.zip"],
-)
-
-git_repository(
-    name = "com_google_glog",
-    commit = "55cc27b6eca3d7906fc1a920ca95df7717deb4e7",
-    remote = "https://github.com/google/glog.git",
 )
 
 http_archive(

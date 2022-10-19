@@ -16,6 +16,7 @@
 #include <string>
 
 #include "absl/flags/parse.h"
+#include "absl/log/initialize.h"
 #include "absl/strings/string_view.h"
 #include "google/protobuf/util/json_util.h"
 #include "tools/render/trace_program.h"
@@ -37,13 +38,13 @@ InputFormat GuessInputFileFormat(absl::string_view filename) {
 
 // render_trace renders the specified trace file using an OpenGL-based viewer.
 int main(int argc, char* argv[]) {
-  absl::ParseCommandLine(argc, argv);
-  google::InitGoogleLogging(argv[0]);
+  std::vector<char*> args = absl::ParseCommandLine(argc, argv);
+  absl::InitializeLog();
 
   CHECK_GE(argc, 2) << "Specify file path";
   auto trace = std::make_unique<quic_trace::Trace>();
   {
-    std::string filename(argv[1]);
+    std::string filename(args[1]);
     std::ifstream f(filename);
     switch (GuessInputFileFormat(filename)) {
       case INPUT_QTR: {

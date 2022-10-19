@@ -24,6 +24,6 @@ cc_library(
     deps = [
         "//quic_trace:quic_trace_cc_proto",
         "@com_google_absl//absl/container:flat_hash_map",
-        "@com_google_glog//:glog",
+        "@com_google_absl//absl/log",
     ],
 )
