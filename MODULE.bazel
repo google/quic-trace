@@ -1,6 +1,7 @@
 module(
-    name = "com_google_quic_trace",
-    version = "",
+    name = "quic_trace",
+    version = "0.0.0",
+    repo_name = "com_google_quic_trace",
 )
 
 bazel_dep(
