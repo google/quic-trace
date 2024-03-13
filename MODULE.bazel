@@ -1,0 +1,28 @@
+module(
+    name = "com_google_quic_trace",
+    version = "",
+)
+
+bazel_dep(
+    name = "abseil-cpp",
+    version = "20240116.1",
+    repo_name = "com_google_absl",
+)
+bazel_dep(
+    name = "bazel_skylib",
+    version = "1.4.1",
+)
+bazel_dep(
+    name = "protobuf",
+    version = "23.1",
+    repo_name = "com_google_protobuf",
+)
+# -- bazel_dep definitions -- #
+
+non_module_deps = use_extension("//:extensions.bzl", "non_module_deps")
+use_repo(
+    non_module_deps,
+    "freetype",
+    "sdl2",
+    "sdl2_ttf",
+)
