@@ -14,9 +14,9 @@ http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "ht
 http_archive(
     name = "sdl2",
     build_file = "external/sdl2.BUILD",
-    sha256 = "e6a7c71154c3001e318ba7ed4b98582de72ff970aca05abc9f45f7cbdc9088cb",
-    strip_prefix = "SDL2-2.0.8",
-    urls = ["https://www.libsdl.org/release/SDL2-2.0.8.zip"],
+    sha256 = "91e0b198b08ee61f652e5c914494c5e8b961536b196a803f858c0468454010ea",
+    strip_prefix = "SDL2-2.32.0",
+    urls = ["https://www.libsdl.org/release/SDL2-2.32.0.zip"],
 )
 
 http_archive(

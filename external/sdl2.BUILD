@@ -23,24 +23,25 @@ sdl_includes = [
 objc_library(
     name = "sdl2_objc",
     srcs = glob([
-        "src/**/*.h",
         "include/*.h",
-    ]),
-    includes = sdl_includes,
-    non_arc_srcs = glob([
+        "src/**/*.h",
         "src/audio/coreaudio/*.m",
         "src/file/cocoa/*.m",
         "src/filesystem/cocoa/*.m",
+        "src/joystick/iphoneos/*.m",
         "src/render/metal/*.m",
         "src/video/cocoa/*.m",
     ]),
+    includes = sdl_includes,
     sdk_frameworks = [
         "AudioToolbox",
         "Carbon",
         "CoreAudio",
+        "CoreHaptics",
         "CoreVideo",
         "Cocoa",
         "ForceFeedback",
+        "GameController",
         "IOKit",
         "OpenGL",
         "Metal",
@@ -54,11 +55,27 @@ sdl_srcs = glob(
         "src/**/*.h",
     ],
     exclude = [
-        "src/video/qnx/**",
-        "src/haptic/windows/**",
-        "src/test/*.c",
-        "src/thread/generic/*.c",
-        "src/core/linux/*.c",
+        # Exclude non-Mac platforms.
+        "src/*/android/**",
+        "src/*/emscripten/**",
+        "src/*/gdk/**",
+        "src/*/libusb/**",
+        "src/*/linux/**",
+        "src/*/n3ds/**",
+        "src/*/openbsd/**",
+        "src/*/os2/**",
+        "src/*/ps2/**",
+        "src/*/psp/**",
+        "src/*/qnx/**",
+        "src/*/riscos/**",
+        "src/*/vita/**",
+        "src/*/windows/**",
+        "src/*/winrt/**",
+        # These C files are included as headers.
+        "src/hidapi/mac/**",
+        "src/thread/generic/**",
+        # Exclude tests.
+        "src/test/**",
     ],
 )
 
@@ -77,7 +94,10 @@ cc_library(
         "@com_google_quic_trace//buildenv:linux": ["-lSDL2"],
         "@com_google_quic_trace//buildenv:osx": [],
     }),
-    textual_hdrs = glob(["src/thread/generic/*.c"]),
+    textual_hdrs = glob([
+        "src/hidapi/mac/*.c",
+        "src/thread/generic/*.c",
+    ]),
     visibility = ["//visibility:public"],
     deps = select({
         "@com_google_quic_trace//buildenv:linux": [],
