@@ -85,14 +85,14 @@ sdl_srcs = glob(
 cc_library(
     name = "sdl2",
     srcs = select({
-        "@com_google_quic_trace//buildenv:linux": [],
-        "@com_google_quic_trace//buildenv:osx": sdl_srcs,
+        "@platforms//os:linux": [],
+        "@platforms//os:osx": sdl_srcs,
     }),
     hdrs = glob(["include/*.h"]),
     includes = sdl_includes,
     linkopts = select({
-        "@com_google_quic_trace//buildenv:linux": ["-lSDL2"],
-        "@com_google_quic_trace//buildenv:osx": [],
+        "@platforms//os:linux": ["-lSDL2"],
+        "@platforms//os:osx": [],
     }),
     textual_hdrs = glob([
         "src/hidapi/mac/*.c",
@@ -100,7 +100,7 @@ cc_library(
     ]),
     visibility = ["//visibility:public"],
     deps = select({
-        "@com_google_quic_trace//buildenv:linux": [],
-        "@com_google_quic_trace//buildenv:osx": [":sdl2_objc"],
+        "@platforms//os:linux": [],
+        "@platforms//os:osx": [":sdl2_objc"],
     }),
 )
