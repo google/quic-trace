@@ -34,7 +34,7 @@ http_archive(
     # We patch out some modules we don't use from freetype config file.
     patch_args = ["-p1"],
     patches = ["external/freetype_config.patch"],
-    sha256 = "bf380e4d7c4f3b5b1c1a7b2bf3abb967bda5e9ab480d0df656e0e08c5019c5e6",
-    strip_prefix = "freetype-2.9",
-    urls = ["https://download.savannah.gnu.org/releases/freetype/freetype-2.9.tar.gz"],
+    sha256 = "0550350666d427c74daeb85d5ac7bb353acba5f76956395995311a9c6f063289",
+    strip_prefix = "freetype-2.13.3",
+    urls = ["https://download.savannah.gnu.org/releases/freetype/freetype-2.13.3.tar.xz"],
 )
