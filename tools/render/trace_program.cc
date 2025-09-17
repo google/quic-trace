@@ -206,6 +206,11 @@ void TraceProgram::PollKeyboard() {
       state_.viewport = new_viewport->size;
     }
   }
+  if (state[SDL_SCANCODE_0]) {
+    state_.offset = vec2{0, 0};
+    state_.viewport.x = renderer_->max_x();
+    state_.viewport.y = renderer_->max_y();
+  }
 }
 
 void TraceProgram::PollMouse() {
