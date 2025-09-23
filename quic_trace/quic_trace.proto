@@ -202,6 +202,35 @@ message Event {
       [default = NORMAL_TRANSMISSION];
 };
 
+// Represents information specific to a MoQT subgroup data stream.
+message MoqtSubgroupStream {
+  optional uint64 track_alias = 1;
+  optional uint64 group_id = 2;
+  optional uint64 subgroup_id = 3;
+};
+
+// Represents information specific to a MoQT probe data stream.
+message MoqtProbeStream {
+  optional uint64 probe_id = 1;
+};
+
+// For a specific QUIC stream, allows to record application-specific metadata.
+message StreamAnnotation {
+  // ID of the stream in question.
+  optional uint64 stream_id = 1;
+
+  // If true, the stream in question is an MoQT control stream.
+  optional bool moqt_control_stream = 2;
+
+  // If the stream in question is an MoQT subgroup stream, provides information
+  // about the subgroup.
+  optional MoqtSubgroupStream moqt_subgroup_stream = 3;
+
+  // If the stream in question is an MoQT probe stream, provides information
+  // about the probe.
+  optional MoqtProbeStream moqt_probe_stream = 4;
+};
+
 message Trace {
   // QUIC version tag, as represented on wire.  Should be always 4 bytes long.
   optional bytes protocol_version = 1;
@@ -212,4 +241,5 @@ message Trace {
   optional bytes destination_connection_id = 3;
 
   repeated Event events = 4;
+  repeated StreamAnnotation stream_annotations = 5;
 };
