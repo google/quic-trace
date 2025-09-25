@@ -18,6 +18,8 @@ Rule that allows to embed binary files into a C++ program.
 The result is exposed as an absl::string_view global variable.
 """
 
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
 def cc_data_blob(name, src, varname):
     native.genrule(
         name = name + "_sources",
@@ -38,7 +40,7 @@ def cc_data_blob(name, src, varname):
             "popd",
         ]),
     )
-    native.cc_library(
+    cc_library(
         name = name,
         srcs = [name + ".cc"],
         hdrs = [name + ".h"],
