@@ -1,14 +1,15 @@
 module(
     name = "quic_trace",
-    repo_name = "com_google_quic_trace",
     version = "0.0.0",
+    repo_name = "com_google_quic_trace",
 )
 
-bazel_dep(name = "abseil-cpp", repo_name = "com_google_absl", version = "20250127.0")
-bazel_dep(name = "apple_support", repo_name = "build_bazel_apple_support", version = "1.18.1")
+bazel_dep(name = "abseil-cpp", version = "20250127.0", repo_name = "com_google_absl")
+bazel_dep(name = "apple_support", version = "1.18.1", repo_name = "build_bazel_apple_support")
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
 bazel_dep(name = "platforms", version = "0.0.11")
-bazel_dep(name = "protobuf", repo_name = "com_google_protobuf", version = "29.3")
+bazel_dep(name = "protobuf", version = "29.3", repo_name = "com_google_protobuf")
+bazel_dep(name = "rules_cc", version = "0.2.8")
 
 http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
