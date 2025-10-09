@@ -14,6 +14,8 @@
 
 #include "tools/render/trace_program.h"
 
+#include <SDL.h>
+
 #include "absl/flags/flag.h"
 #include "absl/time/clock.h"
 #include "tools/render/layout_constants.h"
