@@ -75,6 +75,10 @@ void main(void) {
   if (kind <= -3) {
     v_color = vec4(1.0, 0.425, 0.0, 1.0);
   }
+  // Probes are light blue.
+  if (kind <= -4) {
+    v_color = vec4(0.75, 0.75, 1.0, 1.0);
+  }
   // Highlight the specified packet by making it brighter.
   if (highlighted_packet == gl_PrimitiveIDIn) {
     v_color = kUnit - (kUnit - v_color) * 0.3;
@@ -118,7 +122,11 @@ float PacketTypeToFloat(PacketType type) {
       return -2;
     case PacketType::APP_LIMITED:
       return -3;
+    case PacketType::PROBE:
+      return -4;
   }
+  // Should be unreachable.
+  return 0;
 }
 }  // namespace
 
