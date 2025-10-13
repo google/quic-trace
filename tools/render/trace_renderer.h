@@ -25,7 +25,7 @@
 namespace quic_trace {
 namespace render {
 
-enum class PacketType { SENT, ACKED, LOST, APP_LIMITED };
+enum class PacketType { SENT, ACKED, LOST, APP_LIMITED, PROBE };
 
 // Draws the trace on the current OpenGL context.
 class TraceRenderer {

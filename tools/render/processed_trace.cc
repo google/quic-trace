@@ -66,6 +66,31 @@ std::string FormatRtt(uint64_t rtt_us) {
 
 }  // namespace
 
+ProcessedTrace::StreamAnnotations::StreamAnnotations(const Trace& trace) {
+  for (const StreamAnnotation& annotation : trace.stream_annotations()) {
+    if (annotation.has_moqt_probe_stream()) {
+      probe_streams_.insert(annotation.stream_id());
+    }
+  }
+}
+
+bool ProcessedTrace::StreamAnnotations::IsProbeOnlyPacket(const Event& event) {
+  int probe_streams = 0;
+  int non_probe_streams = 0;
+  for (const Frame& frame : event.frames()) {
+    if (!frame.has_stream_frame_info()) {
+      break;
+    }
+    uint64_t stream_id = frame.stream_frame_info().stream_id();
+    if (probe_streams_.contains(stream_id)) {
+      ++probe_streams;
+    } else {
+      ++non_probe_streams;
+    }
+  }
+  return probe_streams > 0 && non_probe_streams == 0;
+}
+
 void ProcessedTrace::AddPacket(TraceRenderer* renderer,
                                const Event& packet,
                                Interval interval,
@@ -111,6 +136,7 @@ ProcessedTrace::ProcessedTrace(std::unique_ptr<Trace> trace,
                                TraceRenderer* renderer) {
   renderer->PacketCountHint(trace->events_size());
 
+  StreamAnnotations annotations(*trace);
   quic_trace::NumberingWithoutRetransmissions numbering;
   size_t largest_sent = 0;
   uint64_t largest_time = 0;
@@ -123,7 +149,9 @@ ProcessedTrace::ProcessedTrace(std::unique_ptr<Trace> trace,
 
     if (event.event_type() == PACKET_SENT) {
       Interval mapped = numbering.AssignTraceNumbering(event);
-      AddPacket(renderer, event, mapped, PacketType::SENT);
+      AddPacket(renderer, event, mapped,
+                annotations.IsProbeOnlyPacket(event) ? PacketType::PROBE
+                                                     : PacketType::SENT);
       largest_sent =
           std::max<size_t>(mapped.offset + mapped.size, largest_sent);
     }

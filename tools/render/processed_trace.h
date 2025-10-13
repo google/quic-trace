@@ -75,6 +75,17 @@ class ProcessedTrace {
     }
   };
 
+  // Metadata extracted from the stream_annotations field of the trace.
+  class StreamAnnotations {
+   public:
+    explicit StreamAnnotations(const Trace& trace);
+
+    bool IsProbeOnlyPacket(const Event& event);
+
+   private:
+    absl::flat_hash_set<uint64_t> probe_streams_;
+  };
+
   void AddPacket(TraceRenderer* renderer,
                  const Event& packet,
                  Interval interval,
