@@ -119,6 +119,10 @@ message TransportState {
   // Any arbitrary information about congestion control state that is not
   // representable via parameters above.
   optional string congestion_control_state = 7;
+
+  // The estimate of the available bandwidth returned by the congestion
+  // controller.
+  optional uint64 bandwidth_estimate_bps = 8;
 };
 
 // Documents external network parameters supplied to the sender.  Typically not
@@ -159,6 +163,28 @@ enum EventType {
   // (available bandwidth, RTT, congestion window, etc) is supplied to the
   // sender.
   EXTERNAL_PARAMETERS = 5;
+
+  // Indicates that an application has generated an MOQT object, and it has
+  // been enqueued for sending.
+  MOQT_OBJECT_ENQUEUED = 6;
+
+  // Indicates that an MOQT object has been explicitly acknowledged as received
+  // via an OBJECT_ACK message.
+  MOQT_OBJECT_ACKNOWLEDGED = 7;
+
+  // Indicates that the MOQT stack has notified the application of the new
+  // payload bitrate it should target.
+  MOQT_TARGET_BITRATE_SET = 8;
+
+  // Indicates that the MOQT stack has started a bandwidth probe.
+  MOQT_PROBE_START = 9;
+
+  // Indicates that the MOQT stack has completed a bandwidth probe successfully.
+  MOQT_PROBE_SUCCESS = 10;
+
+  // Indicates that the MOQT stack has completed a bandwidth probe
+  // unsuccessfully.
+  MOQT_PROBE_FAILURE = 11;
 };
 
 enum TransmissionReason {
@@ -182,6 +208,16 @@ enum TransmissionReason {
   PROBING_TRANSMISSION = 3;
 };
 
+// A description of an MOQT object associated with a specific event.
+message MoqtObject {
+  optional uint64 track_alias = 1;
+  optional uint64 group_id = 2;
+  optional uint64 subgroup_id = 3;
+  optional uint64 object_id = 4;
+  optional uint64 publisher_priority = 5;
+  optional uint64 payload_size = 6;
+};
+
 // An event that has occurred over duration of the connection.
 message Event {
   optional uint64 time_us = 1;
@@ -200,6 +236,13 @@ message Event {
   // in question was transmitted.
   optional TransmissionReason transmission_reason = 9
       [default = NORMAL_TRANSMISSION];
+
+  // For MOQT object events, describes the associated object.
+  optional MoqtObject moqt_object = 10;
+
+  // For MOQT-related events, indicates the payload bitrate that the MOQT stack
+  // suggests to the application at the moment event happens.
+  optional uint64 bandwidth_estimate_bps = 11;
 };
 
 // Represents information specific to a MoQT subgroup data stream.
