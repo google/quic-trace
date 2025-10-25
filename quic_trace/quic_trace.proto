@@ -243,6 +243,10 @@ message Event {
   // For MOQT-related events, indicates the payload bitrate that the MOQT stack
   // suggests to the application at the moment event happens.
   optional uint64 bandwidth_estimate_bps = 11;
+
+  // For MOQT_OBJECT_ACKNOWLEDGED, indicates the time delta embedded in the object ACK
+  // message.
+  optional int64 moq_object_ack_time_delta_us = 12;
 };
 
 // Represents information specific to a MoQT subgroup data stream.
