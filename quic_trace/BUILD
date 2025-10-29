@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
+load("@com_google_protobuf//bazel:proto_library.bzl", "proto_library")
+load("@com_google_protobuf//bazel:py_proto_library.bzl", "py_proto_library")
+
 licenses(["notice"])
 
 proto_library(
@@ -22,6 +26,12 @@ proto_library(
 
 cc_proto_library(
     name = "quic_trace_cc_proto",
+    visibility = ["//visibility:public"],
+    deps = [":quic_trace_proto"],
+)
+
+py_proto_library(
+    name = "quic_trace_py_proto",
     visibility = ["//visibility:public"],
     deps = [":quic_trace_proto"],
 )
