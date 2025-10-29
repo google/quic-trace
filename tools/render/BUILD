@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-licenses(["notice"])
-
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
 load(":data_blob.bzl", "cc_data_blob")
+
+licenses(["notice"])
 
 cc_data_blob(
     name = "font_data",
@@ -86,6 +86,7 @@ cc_library(
         "@com_google_absl//absl/log",
         "@com_google_absl//absl/strings",
         "@com_google_absl//absl/time",
+        "@sdl2",
     ],
 )
 
