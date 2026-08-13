@@ -15,6 +15,7 @@
 licenses(["notice"])
 
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 load(":data_blob.bzl", "cc_data_blob")
 
 cc_data_blob(
