@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
 licenses(["notice"])
 
 # We can't just glob *.c, since Freetype has .c files that include other .c
